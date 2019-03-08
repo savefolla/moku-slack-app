@@ -1,0 +1,8 @@
+{
+  "name": "moku-slack-app",
+  "version": "1.0.0",
+  "description": "Moku srl internal slack app",
+  "main": "index.js",
+  "author": "Saverio Follador",
+  "license": "MIT"
+}

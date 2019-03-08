@@ -1,0 +1,42 @@
+<script>
+  const ws = new WebSocket('ws://localhost:40510');
+
+  const appendParagraph = (text) => {
+    const p = document.createElement("p");
+    const t = document.createTextNode(text);
+    p.appendChild(t);
+    document.body.appendChild(p);
+  };
+
+  const playAudio = (url) => {
+    new Audio(`https://www.myinstants.com/media/sounds/${url}`).play()
+  };
+
+  const readText = (text) => {
+    const msg = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(msg);
+  };
+
+  ws.onopen = () => {
+    appendParagraph('Connection started')
+  };
+
+  ws.onmessage = (e) => {
+    const data = JSON.parse(e.data);
+    switch (data.type) {
+      case 'read':
+        readText(data.data);
+        appendParagraph(`Read text: ${data.data}`);
+        break;
+      case 'play':
+        playAudio(data.data);
+        appendParagraph(`Played audio: ${data.data}`);
+        break;
+    }
+  }
+</script>
+<style>
+  * {
+    font-family: sans-serif;
+  }
+</style>

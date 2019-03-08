@@ -2,7 +2,9 @@
   "name": "moku-slack-app",
   "version": "1.0.0",
   "description": "Moku srl internal slack app",
-  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "author": "Saverio Follador",
   "license": "MIT"
 }

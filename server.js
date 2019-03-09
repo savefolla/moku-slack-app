@@ -31,5 +31,6 @@ app.post('/play', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Listening on port ${port}!`)
+  console.log(`Server listening on port ${port}!`);
+  console.log('websocket:', wss.address());
 });

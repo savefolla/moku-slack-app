@@ -13,6 +13,9 @@ app.get('/app', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
+const server = http.createServer(app);
+const wss = new WebSocket.Server({server});
+
 app.post('/read', (req, res) => {
   wss.clients.forEach(client => client.send(JSON.stringify({
     type: 'read',
@@ -29,6 +32,4 @@ app.post('/play', (req, res) => {
   res.send(`Playing ${req.body.text} :sound:`);
 });
 
-const server = http.createServer(app);
-const wss = new WebSocket.Server({server});
 server.listen(port);

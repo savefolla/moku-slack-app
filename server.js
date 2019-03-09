@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended: true})); // support encoded bodies
 const WebSocketServer = require('ws').Server;
 const wss = new WebSocketServer({port: websocketPort});
 
-app.get('/', (req, res) => {
+app.get('/app', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 

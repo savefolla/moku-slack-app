@@ -16,6 +16,8 @@ app.get('/app', (req, res) => {
 const server = http.createServer(app);
 const wss = new WebSocket.Server({server});
 
+setInterval(() => wss.clients.forEach(client => client.send(JSON.stringify({type: 'ping'}))), 30 * 1000);
+
 app.post('/read', (req, res) => {
   wss.clients.forEach(client => client.send(JSON.stringify({
     type: 'read',

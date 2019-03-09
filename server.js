@@ -1,14 +1,13 @@
 const port = process.env.PORT || 3000;
-const websocketPort = process.env.WEBSOCKET_PORT || 40510;
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const http = require('http');
+const WebSocket = require('ws');
+
 const app = express();
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({extended: true})); // support encoded bodies
-
-const WebSocketServer = require('ws').Server;
-const wss = new WebSocketServer({port: websocketPort});
 
 app.get('/app', (req, res) => {
   res.sendFile(__dirname + '/index.html');
@@ -30,7 +29,6 @@ app.post('/play', (req, res) => {
   res.send(`Playing ${req.body.text} :sound:`);
 });
 
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}!`);
-  console.log('websocket:', wss.address());
-});
+const server = http.createServer(app);
+const wss = new WebSocket.Server({server});
+server.listen(port);

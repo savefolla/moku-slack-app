@@ -8,7 +8,9 @@
   "author": "Saverio Follador",
   "license": "MIT",
   "dependencies": {
+    "bufferutil": "^4.0.1",
     "express": "^4.16.4",
+    "utf-8-validate": "^5.0.2",
     "ws": "^6.2.0"
   }
 }
